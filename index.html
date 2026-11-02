@@ -171,6 +171,22 @@
   .scard .spill{display:inline-flex; width:fit-content; align-items:center; padding:3px 9px; border-radius:999px; background:var(--surface-2); font-size:10.5px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; color:var(--ink-3);}
   .scard h4{font-size:14.5px; font-weight:700; color:var(--ink); margin:2px 0 0;}
   .scard p{margin:0; font-size:12.8px; color:var(--ink-2); line-height:1.55;}
+  .crit{margin-top:8px; background:var(--surface-2); border:1px solid var(--border); border-radius:8px; padding:10px 12px;}
+  .crit-t{font-size:10.5px; font-weight:700; letter-spacing:.05em; text-transform:uppercase; color:var(--ink-3); margin-bottom:6px;}
+  .crit-g{font-size:12px; font-weight:700; color:var(--ink); margin:6px 0 2px;}
+  .crit-g:first-of-type{margin-top:0;}
+  .crit ul{margin:0; padding-left:16px;}
+  .crit li{font-size:12px; color:var(--ink-2); line-height:1.5;}
+  .crit .note{font-size:11.5px; color:var(--ink-3); margin:4px 0 0;}
+  .ctrl{margin-top:8px; border:1px dashed var(--border); border-left:3px solid var(--risk); border-radius:8px; padding:9px 12px;}
+  .ctrl-t{font-size:10.5px; font-weight:700; letter-spacing:.05em; text-transform:uppercase; color:var(--risk); margin-bottom:4px;}
+  .ctrl ul{margin:0; padding-left:16px;} .ctrl li{font-size:12px; color:var(--ink-2); line-height:1.5;}
+  .crit-common{margin-top:14px; background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:16px 18px; box-shadow:var(--shadow);}
+  .crit-common h4{font-size:14px; font-weight:700; color:var(--ink); margin:0 0 8px;}
+  .crit-common .cc-grid{display:grid; grid-template-columns:1fr 1fr; gap:10px 24px;}
+  @media (max-width:760px){ .crit-common .cc-grid{grid-template-columns:1fr;} }
+  .crit-common .cc-k{font-size:10.5px; font-weight:700; letter-spacing:.05em; text-transform:uppercase; color:var(--ink-3); margin-bottom:3px;}
+  .crit-common p{margin:0; font-size:12.5px; color:var(--ink-2); line-height:1.5;}
 
   .indicator-panel{background:var(--surface); border:1px solid var(--border); border-radius:14px; padding:18px 20px; box-shadow:var(--shadow);}
   .ind-note{margin-top:12px; font-size:11.5px; color:var(--ink-3);}
@@ -292,7 +308,7 @@
       <div class="panel">
         <div class="panel-head">
           <h3 id="pagoTitle">El pago en el mes define el destino</h3>
-          <div class="phint">Pago = cualquier monto pagado en el mes, según SLV.ATRIBUTOSRECAUDOCONTRATO.</div>
+          <div class="phint">Pago = cualquier monto pagado en el mes.</div>
         </div>
         <div class="pago-grid" id="pagoGrid"></div>
         <div class="callout risk" id="pagoCallout"></div>
@@ -380,7 +396,7 @@
             <tr><td>¿Por qué se desliza la cartera?</td><td>Porque no hay pago en el mes. El 57% de los contratos de M90 no paga nada; de ellos, el 99% se desliza y concentran el 98% del saldo deslizado. Con cualquier pago, solo el 3% se desliza.</td></tr>
             <tr><td>¿Dónde se concentra el deterioro?</td><td>En monto: Motomundo (48% del saldo deslizado), motos (63%), el canal Tienda (80%) y las zonas Centro y Norte (55%). En tasa de no pago: Jetstereo (63%), telefonía (68%), créditos de 0 a 3 meses (79%) y Tienda Express (63%).</td></tr>
             <tr><td>¿Qué segmentos tienen mayor probabilidad de recuperación?</td><td>Ultramotor con más de 7 meses de antigüedad: se recupera el 32%-33%, frente a un promedio de 26.9% en M90. La menor probabilidad está en Jetstereo con 0 a 6 meses (18.7%).</td></tr>
-            <tr><td>¿Dónde debe intervenir Cobros antes de que el cliente llegue a una mora más profunda?</td><td>En M30 y M60. En M30 todavía paga el 68.6% de los contratos y se recupera el 30.2%; en M90 solo paga el 42.8%. El foco temprano son los créditos de 0 a 6 meses, que en M90 tienen la menor recuperación de cada empresa.</td></tr>
+            <tr><td>¿Dónde debe intervenir Cobros antes de que el cliente llegue a una mora más profunda?</td><td>En M30 y M60. En M30 todavía paga el 68.6% de los contratos y se recupera el 30.2%; en M90 solo paga el 42.8%. El foco temprano son los créditos de 0 a 6 meses a partir de M60: en M30 se comportan como el promedio (31.5% sin pago frente a 31.4%), pero en M60 el 51% no paga, frente al 42% del promedio, y en M90 tienen la menor recuperación de cada empresa.</td></tr>
             <tr><td>¿Qué acciones pueden aumentar la rehabilitación?</td><td>Las cuatro propuestas que siguen, cada una ligada a un segmento y a su dato de sustento.</td></tr>
           </tbody>
         </table>
@@ -398,29 +414,31 @@
           <span class="spill">~1,260 contratos/mes en M90</span>
           <h4>Convertir el pago parcial en pago del total vencido</h4>
           <p>Cada mes, unos 1,260 contratos de M90 pagan algo pero no se rehabilitan: bajan a rollback o permanecen. En octubre 2026, los rehabilitados pagaron una mediana de 1.45 veces lo vencido; los de rollback, 0.85 veces, y los que permanecieron, 0.39 veces. Orientar el acuerdo de pago a cubrir el total vencido es la vía más directa para subir la rehabilitación.</p>
+          <div class="crit"><div class="crit-t">Condiciones de la base de datos</div><div class="crit-g">Durante el mes · pago parcial</div><ul><li>Bucket M90 (61–90 días de mora)</li><li>Cualquier sociedad (1400, 1500, 1600)</li><li>Registró un pago en el mes, pero menor a su total vencido</li></ul><p class="note">Se identifica con los datos diarios de Cobros; aplica durante la gestión del mes.</p><div class="crit-g">Grupo 2 · cerca de terminar su crédito (~650 contratos/mes)</div><ul><li>Bucket M90 (61–90 días de mora)</li><li>Cualquier sociedad</li><li>75% o más del capital pagado</li></ul><p class="note">Buenos pagadores en su historial; rehabilitación cercana al 28%. Poco saldo: suben la tasa de rehabilitación más que el monto.</p></div><div class="ctrl"><div class="ctrl-t">Control de contacto</div><ul><li><b>Pausa por promesa:</b> si el cliente tiene una promesa de pago vigente, no se le contacta hasta su vencimiento. Es clave aquí: el cliente ya pagó algo y seguir insistiendo se percibe como acoso.</li><li><b>Límite de intentos:</b> máximo de intentos de contacto por cliente a la semana, sumando todos los canales.</li></ul></div>
         </div>
         <div class="scard" style="--sbar:var(--accent)">
           <span class="spill">~490 contratos/mes · recuperabilidad alta</span>
           <h4>Asegurar el contacto en Ultramotor con más de 7 meses</h4>
           <p>Es el segmento donde la gestión convierte más: se recupera el 32%-33%, entre 5 y 6 puntos por encima del promedio de M90, y tiene el menor no pago (45%-49%). Garantizar que cada contrato tenga contacto efectivo en el mes es donde el esfuerzo rinde más.</p>
+          <div class="crit"><div class="crit-t">Condiciones de la base de datos</div><div class="crit-g">Grupo 1A</div><ul><li>Bucket M90 (61–90 días de mora)</li><li>Sociedad 1500 (Ultramotor)</li><li>Antigüedad de 7 meses o más</li></ul></div><div class="ctrl"><div class="ctrl-t">Control de contacto</div><ul><li><b>Límite de intentos:</b> máximo de intentos de contacto por cliente a la semana, sumando todos los canales. Asegurar el contacto significa lograr una conversación efectiva, no llamar más veces.</li><li><b>Pausa por promesa:</b> si el cliente tiene una promesa de pago vigente, no se le contacta hasta su vencimiento.</li></ul></div>
         </div>
         <div class="scard" style="--sbar:var(--cat-4)">
           <span class="spill">~1,610 contratos/mes · mayor monto</span>
           <h4>Priorizar por saldo en Motomundo con más de 7 meses</h4>
           <p>Concentra el 39% del saldo deslizado de M90 con una recuperabilidad media (28%-29%). Por volumen y monto, pequeñas mejoras en este segmento mueven más lempiras que en cualquier otro.</p>
+          <div class="crit"><div class="crit-t">Condiciones de la base de datos</div><div class="crit-g">Grupo 1B</div><ul><li>Bucket M90 (61–90 días de mora)</li><li>Sociedad 1600 (Motomundo)</li><li>Antigüedad de 7 meses o más</li><li>Ordenar por saldo capital, de mayor a menor</li></ul></div>
         </div>
         <div class="scard" style="--sbar:var(--risk)">
-          <span class="spill">~985 contratos/mes · créditos de 0-6 meses</span>
+          <span class="spill">~2,180 contratos/mes en M60 · créditos de 0-6 meses</span>
           <h4>Llegar antes con los créditos nuevos</h4>
-          <p>Los créditos de 0 a 6 meses tienen la menor recuperación de cada empresa en M90 (19%-25%); en Jetstereo, el 74% no paga. En M30 y M60, el no pago de este mismo segmento es de 36%: intervenir ahí, antes de que llegue a M90, y compartir la señal con Crédito.</p>
+          <p>Los créditos de 0 a 6 meses tienen la menor recuperación de cada empresa en M90 (19%-25%); en Jetstereo, el 74% no paga. En M30 todavía se comportan como el promedio, pero en M60 el 51% ya no paga (frente al 42% del promedio de M60) y el 53% se desliza: intervenir en M60, antes de que lleguen a M90, y compartir la señal con Crédito.</p>
+          <div class="crit"><div class="crit-t">Condiciones de la base de datos</div><div class="crit-g">Grupo 3 · intervención temprana</div><ul><li>Bucket M60 (31–60 días de mora)</li><li>Cualquier sociedad</li><li>Antigüedad de 0 a 6 meses</li></ul><div class="crit-g">Grupo 4 · señal para Crédito</div><ul><li>Bucket M90 (61–90 días de mora)</li><li>Sociedad 1400 (Jetstereo)</li><li>Antigüedad de 0 a 6 meses</li></ul><p class="note">Gestión de menor intensidad y reporte a Crédito de los casos.</p></div><div class="ctrl"><div class="ctrl-t">Control de contacto</div><ul><li><b>Límite de intentos:</b> máximo de intentos de contacto por cliente a la semana, sumando todos los canales. Es clave en el Grupo 3: son clientes nuevos gestionados desde M60, antes de lo habitual.</li><li><b>Pausa por promesa:</b> si el cliente tiene una promesa de pago vigente, no se le contacta hasta su vencimiento.</li></ul></div>
         </div>
       </div>
     </section>
 
     <footer>
-      <p><b>Fuente y metodología:</b> Base_de_datos_cobros_V2 - octubre (extracción del 2 de noviembre de 2026), generada con query_base_historica_M90_M120 sobre SLV.vCarteraCreditoCapital_Global (foto diaria por contrato), con atributos de SLV.ATRIBUTOSCONTRATO, Dim.vSucursal, SLV.ATRIBUTOSVENTAS, DmCo.vClientesSAP y pagos de SLV.ATRIBUTOSRECAUDOCONTRATO. 795,568 registros contrato-mes, de enero 2025 a octubre 2026, para las sociedades 1400 Jetstereo, 1500 Ultramotor y 1600 Motomundo. Inicio del mes = cierre del mes anterior; final = cierre del mes. Buckets por días de mora: M30 1-30, M60 31-60, M90 61-90, M120 91-120.</p>
-      <p><b>Definiciones:</b> rehabilitado = queda al día al cierre, incluye cancelaciones del saldo completo; rollback = baja de bucket sin quedar al día; roll rate = desliza + salta 2+ buckets; sin pago = monto pagado en el mes igual a 0; saldo = saldo capital. El saldo contagiado (capital + intereses) solo está disponible para el último mes, en la tabla de Cobros (SLV.rollbackcontratos_historico, foto del 1 de octubre 2026).</p>
-      <p><b>Validación y limitaciones:</b> al 30 de septiembre 2026, la fuente cuadra con la tabla de Cobros: 5,073 vs 5,008 contratos en M90 y L 95.1 M vs L 93.1 M de saldo capital; rehabilitación de septiembre 16.5% vs 16.9%; en octubre, rehabilitación M90 18.9% vs 19.0% y M120 13.4% vs 13.4%. El pago en el mes es simultáneo al resultado: describe, no predice. Los picos de diciembre, marzo y junio podrían relacionarse con el aguinaldo y el décimo cuarto mes; es una hipótesis por validar con Cobros. En meses de 31 días, los contratos que cierran el mes anterior con exactamente 90 o 120 días de mora aparecen dos buckets arriba (por ejemplo, octubre 2026: 2.2% en M90); es un efecto de calendario equivalente a deslizarse y se cuenta dentro del roll rate (la tabla de Cobros, que clasifica por nivel de mora, no muestra esos saltos). La cobertura de atributos es de aproximadamente 98%.</p>
+      <p><b>Fuente:</b> Base_de_datos_cobros_V2 - octubre y Base_de_datos_cobros_V2 - query de cobros - octubre.</p>
       <div class="fname">Preparado por Analista de Estrategia de Negocios — Estrategia de Cobros · 2 de noviembre de 2026.</div>
     </footer>
 
